@@ -34,7 +34,7 @@ export const signIn = async (req: Request, res: Response) => {
     res.cookie("session_code", session_code, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "lax",
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
 
@@ -96,7 +96,7 @@ export const signUp = async (req: Request, res: Response) => {
     res.cookie("session_code", session_code, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "lax",
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
 
