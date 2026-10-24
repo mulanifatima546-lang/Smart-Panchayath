@@ -36,6 +36,7 @@ export const signIn = async (req: Request, res: Response) => {
       secure: process.env.NODE_ENV === "production",
       sameSite: "none",
       maxAge: 1000 * 60 * 60 * 24 * 7,
+      priority: "high",
     });
 
     res.status(200).json({
@@ -98,6 +99,7 @@ export const signUp = async (req: Request, res: Response) => {
       secure: process.env.NODE_ENV === "production",
       sameSite: "none",
       maxAge: 1000 * 60 * 60 * 24 * 7,
+      priority: "high",
     });
 
     res.status(201).json({
