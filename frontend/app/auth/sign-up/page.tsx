@@ -15,8 +15,9 @@ import {
 
 import bg from "@/assets/images/SignUp.png";
 import { isAxiosError } from "axios";
-import { api } from "@/constant/url";
+import { api } from "@/constant/api";
 import toast from "react-hot-toast";
+import { usePanchayat } from "@/context/panchayat.context";
 
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
@@ -29,6 +30,9 @@ const SignUp = () => {
   const [pinCode, setPinCode] = useState("");
   const [cityName, setCityName] = useState("");
   const [selectedState, setSelectedState] = useState("");
+  const [panchayat, setPanchayat] = useState("");
+
+  const { panchayats } = usePanchayat();
 
   const handleSignUp = async () => {
     setLoading(true);
@@ -160,6 +164,21 @@ const SignUp = () => {
             >
               {states.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
+                  {option.name}
+                </MenuItem>
+              ))}
+            </TextField>
+
+            <TextField
+              select
+              fullWidth
+              label="Panchayat"
+              value={panchayat}
+              onChange={(e) => setPanchayat(e.target.value)}
+              helperText="Please select your panchayat"
+            >
+              {panchayats.map((option) => (
+                <MenuItem key={option._id} value={option.name}>
                   {option.name}
                 </MenuItem>
               ))}

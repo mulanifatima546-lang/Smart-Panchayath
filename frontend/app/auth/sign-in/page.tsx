@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 import bg from "@/assets/images/SignIn.png";
-import { api } from "@/constant/url";
+import { api } from "@/constant/api";
 import { isAxiosError } from "axios";
 import { toast } from "react-hot-toast";
 
