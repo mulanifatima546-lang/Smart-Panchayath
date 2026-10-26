@@ -9,7 +9,11 @@ const port = process.env.PORT || 3000;
 
 app.use(
   cors({
-    origin: ["https://smart-panchayath.vercel.app", "http://localhost:3000"],
+    origin: [
+      "https://smart-panchayath.vercel.app",
+      "https://adminsmart-panchayath.vercel.app",
+      "http://localhost:3000",
+    ],
     credentials: true,
   }),
 );
