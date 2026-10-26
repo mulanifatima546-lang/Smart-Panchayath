@@ -4,7 +4,7 @@ import axios from "axios";
 export const url = "https://smart-panchayath-a0b0.onrender.com";
 
 export const api = axios.create({
-  baseURL: url,
+  baseURL: `${url}/api`,
   headers: {
     "Content-Type": "application/json",
   },
