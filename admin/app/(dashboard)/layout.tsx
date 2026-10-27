@@ -7,7 +7,6 @@ import { ReactNode } from "react";
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="flex h-dvh w-full flex-col overflow-hidden">
-      Ō
       <div className="z-30 shrink-0">
         <Nav />
       </div>

@@ -8,7 +8,7 @@ panchayatRouter
   .route("/create")
   .post(protect, panchayatController.createNewPanchayat);
 
-panchayatRouter.route("/").get(protect, panchayatController.getAllPanchatats);
+panchayatRouter.route("/").get(panchayatController.getAllPanchatats);
 panchayatRouter
   .route("/:panchayatId")
   .get(protect, panchayatController.getPanchayatById);

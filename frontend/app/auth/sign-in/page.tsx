@@ -8,11 +8,14 @@ import bg from "@/assets/images/SignIn.png";
 import { api } from "@/constant/api";
 import { isAxiosError } from "axios";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
+
+  const router = useRouter();
 
   const handleSignIn = async () => {
     setLoading(true);
@@ -24,6 +27,7 @@ const SignIn = () => {
       });
 
       toast.success(data.message || "Account created successfully");
+      router.push("/citizen");
       console.log(data);
     } catch (error) {
       console.log(error);

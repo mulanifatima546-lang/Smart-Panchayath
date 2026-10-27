@@ -55,7 +55,7 @@ export const signUp = async (req: Request, res: Response) => {
   try {
     console.log(req.body);
 
-    const { name, username, email, password, address } = req.body;
+    const { name, username, email, password, address, panchayat } = req.body;
 
     const user = await userModel.findOne({
       $or: [{ username: username }, { email: email }],
@@ -93,6 +93,7 @@ export const signUp = async (req: Request, res: Response) => {
       role: isAdmin ? "administrator" : "citizen",
       address,
       isVerified,
+      panchayat,
     });
 
     await newUser.save();

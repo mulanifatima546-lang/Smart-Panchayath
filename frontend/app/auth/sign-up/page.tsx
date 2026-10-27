@@ -18,6 +18,7 @@ import { isAxiosError } from "axios";
 import { api } from "@/constant/api";
 import toast from "react-hot-toast";
 import { usePanchayat } from "@/context/panchayat.context";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
   const [loading, setLoading] = useState(false);
@@ -34,6 +35,8 @@ const SignUp = () => {
 
   const { panchayats } = usePanchayat();
 
+  const router = useRouter();
+
   const handleSignUp = async () => {
     setLoading(true);
     try {
@@ -49,11 +52,13 @@ const SignUp = () => {
           cityName,
           state: selectedState,
         },
+        panchayat,
       });
 
       console.log(data);
 
       toast.success(data.message || "Account created successfully");
+      router.push("/citizen");
     } catch (error) {
       console.log(error);
       if (isAxiosError(error)) {
@@ -178,7 +183,7 @@ const SignUp = () => {
               helperText="Please select your panchayat"
             >
               {panchayats.map((option) => (
-                <MenuItem key={option._id} value={option.name}>
+                <MenuItem key={option._id} value={option._id}>
                   {option.name}
                 </MenuItem>
               ))}
