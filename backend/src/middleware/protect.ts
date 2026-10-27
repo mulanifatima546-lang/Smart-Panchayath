@@ -10,39 +10,54 @@ declare global {
   }
 }
 
-const protect = async (req: Request, res: Response, next: NextFunction) => {
+const protect = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
   try {
-    const session_code = req.cookies.session_code;
+    const session_code = req.cookies?.session_code;
 
     if (!session_code) {
-      return res.status(401).redirect("http://localhost:3000");
+      res.status(401).json({
+        authenticated: false,
+        message: "Not authorized, please sign in",
+      });
+      return;
     }
 
     const secret = process.env.JWT_SECRET;
 
     if (!secret) {
+      console.error("JWT_SECRET is not configured");
+
+      res.status(500).json({
+        message: "Internal server configuration error",
+      });
       return;
     }
 
-    const decode = jwt.verify(session_code, secret) as {
+    const decoded = jwt.verify(session_code, secret) as {
       userId: string;
-      iat: number;
-      exp: number;
     };
 
-    const user = await userModel.findById(decode.userId);
+    const user = await userModel.findById(decoded.userId);
 
     if (!user) {
-      return res
-        .status(401)
-        .json({ message: "Not authorized, user not found" });
+      res.status(401).json({
+        authenticated: false,
+        message: "Not authorized, user not found",
+      });
+      return;
     }
 
     req.user = user;
-
     next();
   } catch (error) {
-    res.status(401).json({ message: "Not authorized, session failed" });
+    res.status(401).json({
+      authenticated: false,
+      message: "Not authorized, session invalid or expired",
+    });
   }
 };
 
