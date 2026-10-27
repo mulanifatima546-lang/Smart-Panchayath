@@ -81,6 +81,10 @@ export const signUp = async (req: Request, res: Response) => {
       email === process.env.ADMIN_EMAIL &&
       username === process.env.ADMIN_USERNAME;
 
+    const isVerified =
+      email === process.env.ADMIN_EMAIL &&
+      username === process.env.ADMIN_USERNAME;
+
     const newUser = new userModel({
       name,
       username,
@@ -88,6 +92,7 @@ export const signUp = async (req: Request, res: Response) => {
       password: hashedPassword,
       role: isAdmin ? "administrator" : "citizen",
       address,
+      isVerified,
     });
 
     await newUser.save();

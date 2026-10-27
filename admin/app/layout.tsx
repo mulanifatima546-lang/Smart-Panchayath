@@ -1,9 +1,10 @@
+import { AdminProvider } from "@/context/admin.context";
+import { PanchayatProvider } from "@/context/panchayat.context";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 import { Toaster } from "react-hot-toast";
-import { Typography } from "@mui/material";
-import { AdminProvider } from "@/context/admin.contex";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,22 +21,32 @@ export const metadata: Metadata = {
   description: "Admin panel for managing the Smart Panchayath application",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} min-h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <AdminProvider>
-          <section className="md:block hidden">{children}</section>
-        </AdminProvider>
-        <div className="flex h-screen px-10 text-center md:hidden justify-center items-center">
-          <Typography variant="h6">
-            You can access admin panel only through Desktop
-          </Typography>
-        </div>
-        <Toaster />
+      <body className="min-h-screen overflow-x-clip">
+        <AppRouterCacheProvider>
+          <AdminProvider>
+            <PanchayatProvider>
+              <section className="hidden min-h-screen w-full md:block">
+                {children}
+              </section>
+            </PanchayatProvider>
+
+            <div className="flex min-h-screen items-center justify-center px-6 text-center md:hidden">
+              <h2 className="text-xl font-semibold text-slate-800">
+                You can access the admin panel only through a desktop.
+              </h2>
+            </div>
+          </AdminProvider>
+
+          <Toaster position="top-right" />
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

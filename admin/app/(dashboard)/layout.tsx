@@ -1,67 +1,24 @@
 "use client";
+
 import Nav from "@/components/Nav";
 import Sidebar from "@/components/Sidebar";
-import { IconButton, Menu, MenuItem } from "@mui/material";
-import { ReactNode, useId, useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
-import { useRouter } from "next/navigation";
+import { ReactNode } from "react";
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
-  const router = useRouter();
-
-  const id = useId();
-  const buttonId = `${id}-button`;
-  const menuId = `${id}-menu`;
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = (path?: string) => {
-    setAnchorEl(null);
-    if (path) {
-      router.push(path);
-    }
-  };
-
   return (
-    <div className="h-screen flex flex-col overflow-hidden">
-      <Nav />
-      <div className="flex flex-1">
-        <Sidebar />
-        <div className="w-full h-full p-4 border-t border-l rounded-md border-gray-400">
-          {children}
-          <div className="absolute bottom-10 right-10">
-            <IconButton onClick={handleClick} size="large">
-              <AddIcon sx={{ fontSize: 60 }} className="text-blue-500" />
-            </IconButton>
+    <div className="flex h-dvh w-full flex-col overflow-hidden">
+      Ō
+      <div className="z-30 shrink-0">
+        <Nav />
+      </div>
+      <div className="flex min-h-0 flex-1 overflow-hidden">
+        <aside className="hidden h-full w-65 shrink-0 md:block">
+          <Sidebar />
+        </aside>
 
-            <Menu
-              id={menuId}
-              anchorEl={anchorEl}
-              open={open}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              transformOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-              }}
-              slotProps={{
-                list: {
-                  "aria-labelledby": buttonId,
-                },
-              }}
-            >
-              <MenuItem onClick={() => handleClose("/new-panchayat")}>
-                New Panchayat
-              </MenuItem>
-            </Menu>
-          </div>
-        </div>
+        <main className="relative min-h-0 min-w-0 flex-1 overflow-x-hidden overflow-y-auto border-l border-gray-200 bg-gray-50 p-4 md:p-6">
+          <div className="mx-auto w-full max-w-[1600px] pb-20">{children}</div>
+        </main>
       </div>
     </div>
   );

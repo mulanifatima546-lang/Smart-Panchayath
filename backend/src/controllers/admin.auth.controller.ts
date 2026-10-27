@@ -34,5 +34,6 @@ export const signInAdmin = async (req: Request, res: Response) => {
     res.status(200).json({ message: "Admin signed in successfully" });
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
+    console.log(error);
   }
 };

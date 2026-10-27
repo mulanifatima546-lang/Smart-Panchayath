@@ -8,6 +8,12 @@ panchayatRouter
   .route("/create")
   .post(protect, panchayatController.createNewPanchayat);
 
-panchayatRouter.route("/").get(panchayatController.getAllPanchatats);
+panchayatRouter.route("/").get(protect, panchayatController.getAllPanchatats);
+panchayatRouter
+  .route("/:panchayatId")
+  .get(protect, panchayatController.getPanchayatById);
+panchayatRouter
+  .route("/:panchayatId")
+  .put(protect, panchayatController.updatePanchayat);
 
 export default panchayatRouter;

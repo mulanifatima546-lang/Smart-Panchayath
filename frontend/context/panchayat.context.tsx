@@ -47,8 +47,11 @@ export function PanchayatProvider({ children }: { children: ReactNode }) {
       const { data } = await api.get("/panchayat");
 
       setPanchayat(data.panchayats);
+      console.log({ panchayats: data.panchayats });
     } catch (err) {
       setPanchayat([]);
+      console.log(error);
+
       setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
