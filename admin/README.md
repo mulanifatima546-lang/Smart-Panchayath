@@ -1,36 +1,152 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Smart Panchayat — Admin Dashboard
 
-## Getting Started
+The administrative interface for the Smart Panchayat platform. It is intended to help authorized administrators and Panchayat operators manage public notices, oversee citizen-facing services, and coordinate digital governance workflows.
 
-First, run the development server:
+## ✨ Features
+
+- **Administrative Dashboard** for centralized management.
+- **Role-Based Access**
+  - Administrator-level access.
+  - Panchayat operator-level access.
+- **Notice Management**
+  - Create and save draft notices.
+  - Publish notices.
+  - Edit draft notices.
+  - Withdraw published notices.
+  - Select notice categories and types.
+  - Target all Panchayat citizens or selected recipients.
+  - Configure notice expiry dates.
+  - Search, filter, and paginate notice records.
+- **Panchayat-Specific Management** for operators.
+- **Citizen Communication** through published announcements.
+- **Backend API Integration** for administrative operations.
+
+Additional administrative modules, such as citizen management, application processing, and service configuration, can be documented here if they are implemented in your admin application.
+
+## 🛠️ Tech Stack
+
+The following technologies are consistent with the frontend and backend code shared for this project. Confirm the admin repository uses the same frontend stack before publishing this list.
+
+- **Next.js** — Web framework, if used by the admin frontend
+- **React** — Component-based user interface
+- **TypeScript** — Type-safe development
+- **Tailwind CSS** — Styling
+- **Material UI (MUI)** — UI components and icons, if used
+- **Axios** — Backend API communication
+- **Node.js and Express.js** — Backend API
+- **MongoDB and Mongoose** — Data storage and modeling
+
+## 📁 Example Project Structure
+
+```text
+admin-dashboard/
+├── app/
+│   ├── dashboard/
+│   ├── notices/
+│   ├── citizens/
+│   └── applications/
+├── components/
+├── constants/
+├── lib/
+├── package.json
+└── .env.example
+```
+
+_This is an example structure, not a verified listing of your admin repository._
+
+## ⚙️ Getting Started
+
+### Prerequisites
+
+- Node.js
+- npm
+- Access to a running Smart Panchayat backend
+- Authorized administrator or operator credentials
+
+### Installation
+
+```bash
+git clone <YOUR-ADMIN-REPOSITORY-URL>
+cd <YOUR-ADMIN-FOLDER>
+npm install
+```
+
+### Environment Configuration
+
+Configure the backend API URL using the environment variable supported by your admin application.
+
+For a Next.js frontend, an example is:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000
+```
+
+Make sure the variable name matches your actual API configuration.
+
+### Run the Dashboard
+
+If your admin frontend uses Next.js and defines the standard scripts:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open the local URL printed in your terminal.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+Use the scripts provided by your repository's `package.json`.
 
-To learn more about Next.js, take a look at the following resources:
+## 🔌 API Integration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The admin dashboard communicates with the backend to manage notices and related records.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Method | Endpoint                          | Administrative operation |
+| ------ | --------------------------------- | ------------------------ |
+| POST   | `/api/notices`                    | Create a notice          |
+| GET    | `/api/notices`                    | List notices             |
+| GET    | `/api/notices/:noticeId`          | View notice details      |
+| PATCH  | `/api/notices/:noticeId`          | Update a draft           |
+| PATCH  | `/api/notices/:noticeId/publish`  | Publish a notice         |
+| PATCH  | `/api/notices/:noticeId/withdraw` | Withdraw a notice        |
 
-## Deploy on Vercel
+The backend enforces role and Panchayat access restrictions. The frontend should display actions according to the signed-in user's permissions, while the backend remains responsible for enforcing authorization.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔐 Security Considerations
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Restrict administrative pages to authenticated users.
+- Enforce role-based permissions on the server.
+- Prevent operators from managing notices belonging to other Panchayats.
+- Keep secrets and private credentials out of client-side environment variables.
+- Configure CORS and cookie settings correctly for deployment.
+- Validate user input on the backend.
+
+## 🚀 Future Enhancements
+
+Potential enhancements, depending on project requirements:
+
+- Administrative analytics and reporting.
+- Audit logs for notice publication and withdrawal.
+- Bulk notice publishing.
+- Advanced search and filters.
+- Citizen and application management tools.
+
+## 🤝 Contributing
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Test your changes.
+4. Submit a pull request with a description of the changes.
+
+## 📄 License
+
+Add your project's license information here.
+
+---
+
+Administrative interface for the **Smart Panchayat digital governance platform**.

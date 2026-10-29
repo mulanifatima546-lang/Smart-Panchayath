@@ -1,36 +1,169 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Smart Panchayat — Citizen Web App
 
-## Getting Started
+A citizen-facing web application for the Smart Panchayat platform. It provides a digital interface for citizens to access Panchayat services, submit applications, track application progress, view notices, and access relevant Panchayat information.
 
-First, run the development server:
+## ✨ Features
+
+- **Citizen Dashboard**
+  - Personalized welcome section.
+  - Summary cards for application statistics.
+  - Recent application overview.
+- **Digital Panchayat Services**
+  - Browse available services.
+  - Start new service applications.
+- **Application Tracking**
+  - View submitted applications.
+  - Access individual application details.
+  - Review application status and updates.
+- **Panchayat Notices**
+  - View published public notices.
+  - Search notices by title or description.
+  - Filter notices by category.
+  - View publication dates and attachments.
+  - Mark notices as read.
+- **Citizen Profile** and Panchayat information.
+- **Responsive UI** for desktop and mobile devices.
+- **API integration** using a centralized Axios instance.
+- **Loading, error, and refresh states** for a smoother user experience.
+
+## 🛠️ Tech Stack
+
+- **Next.js** — React framework and routing
+- **React** — Component-based UI
+- **TypeScript** — Type-safe frontend development
+- **Tailwind CSS** — Utility-first styling
+- **Material UI (MUI)** — UI components and icons
+- **Axios** — HTTP requests to the backend API
+- **React Hot Toast** — User notifications
+
+## 📁 Project Structure
+
+```text
+citizen-web/
+├── app/
+│   └── citizen/
+│       ├── page.tsx
+│       ├── notices/
+│       │   └── page.tsx
+│       └── applications/
+├── components/
+│   └── citizen/
+│       ├── DashboardLoading.tsx
+│       ├── DashboardError.tsx
+│       ├── WelcomeBanner.tsx
+│       ├── SummaryCards.tsx
+│       ├── ServiceGrid.tsx
+│       ├── RecentApplications.tsx
+│       ├── ProfileCard.tsx
+│       ├── PanchayatCard.tsx
+│       └── AssistanceCard.tsx
+├── constant/
+│   └── api.ts
+├── package.json
+└── .env.example
+```
+
+_Update this tree to reflect your actual folders and filenames._
+
+## ⚙️ Getting Started
+
+### Prerequisites
+
+- Node.js
+- npm
+- A running Smart Panchayat backend API
+
+### Installation
+
+```bash
+git clone <YOUR-CITIZEN-WEB-REPOSITORY-URL>
+cd <YOUR-CITIZEN-WEB-FOLDER>
+npm install
+```
+
+### Configure the API
+
+The application uses a centralized Axios instance to communicate with the backend.
+
+Example configuration:
+
+```ts
+import axios from "axios";
+
+export const url = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
+export const api = axios.create({
+  baseURL: `${url}/api`,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
+});
+```
+
+If your current configuration uses a hardcoded URL, update it to an environment variable if you want easier deployment configuration.
+
+Create `.env.local`:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000
+```
+
+Configure the backend CORS settings and authentication cookies appropriately when running the frontend and backend on different origins.
+
+### Run the Application
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000` in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Production Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## 🔗 Backend Integration
 
-To learn more about Next.js, take a look at the following resources:
+The citizen web app communicates with the backend for:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Citizen dashboard data.
+- Panchayat service information.
+- Application creation and tracking.
+- Published notices and notice read status.
+- Citizen profile and Panchayat details.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Example notice API request:
 
-## Deploy on Vercel
+```ts
+const response = await api.get("/notices", {
+  params: {
+    page: 1,
+    limit: 50,
+  },
+});
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+const notices = response.data.data;
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎯 Project Goal
+
+To make Panchayat services and public information more accessible by providing citizens with a centralized digital platform.
+
+## 🤝 Contributing
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Implement and test your changes.
+4. Submit a pull request.
+
+## 📄 License
+
+Add your project's license information here.
+
+---
+
+Part of the **Smart Panchayat digital governance platform**.

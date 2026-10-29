@@ -219,6 +219,10 @@ function NewApplicationForm() {
       return false;
     }
 
+    if (!documents) {
+      toast.error("Supporting document is required!");
+    }
+
     if (
       [
         "Residence Certificate",
@@ -888,7 +892,7 @@ function NewApplicationForm() {
                           updateDocument(index, "name", e.target.value)
                         }
                         className={inputClass}
-                        placeholder="e.g. Aadhaar Card"
+                        placeholder="e.g. Supporting Document"
                       />
                     </div>
 
