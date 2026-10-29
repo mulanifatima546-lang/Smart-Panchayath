@@ -7,5 +7,6 @@ router.use("/admin", (await import("./admin.router.js")).default);
 router.use("/panchayat", (await import("./panchayat.router.js")).default);
 router.use("/application", (await import("./application.router.js")).default);
 router.use("/citizen", (await import("./citizen.router.js")).default);
+router.use("/notice", (await import("./notice.router.js")).default);
 
 export default router;

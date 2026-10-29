@@ -14,6 +14,7 @@ app.use(
       "https://smart-panchayath.vercel.app",
       "https://adminsmart-panchayath.vercel.app",
       "http://localhost:3000",
+      "http://localhost:3001",
     ],
     credentials: true,
   }),

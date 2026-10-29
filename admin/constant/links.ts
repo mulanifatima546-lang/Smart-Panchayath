@@ -4,12 +4,16 @@ export const links = [
     path: "/dashboard",
   },
   {
+    name: "Applications",
+    path: "/applications",
+  },
+  {
     name: "Panchayat Management",
     path: "/panchayat",
   },
   {
-    name: "Operator Management",
-    path: "/operator",
+    name: "Notice",
+    path: "/notice",
   },
   {
     name: "Citizen Management",
