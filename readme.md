@@ -91,7 +91,7 @@ smart-panchayat/
 │   ├── package.json
 │   └── README.md
 │
-├── citizen-web/
+├── frontend/
 │   ├── app/
 │   ├── components/
 │   ├── constant/
@@ -154,7 +154,7 @@ npm run dev
 Open a new terminal:
 
 ```bash
-cd citizen-web
+cd frontend
 npm install
 ```
 
